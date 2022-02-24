@@ -16,27 +16,19 @@ struct RegisterView: View {
             TextField("Enter your name...", text: $name)
                 .multilineTextAlignment(.center)
             Button(action: registerUser) {
-                if name >= String(3) {
-                    HStack {
-                        Image(systemName: "checkmark.circle")
-                        Text("Ok")
-                    }
-                } else {
-                    HStack {
-                        Image(systemName: "checkmark.circle")
-                            .disabled(true)
-                        Text("Ok")
-                            .disabled(true)
-                    }
+                HStack {
+                    Image(systemName: "checkmark.circle")
+                    Text("Ok")
                 }
             }
+            .disabled(name.count < 3)
         }
     }
 }
 
 extension RegisterView {
     private func registerUser() {
-        if !name.isEmpty && name >= String(3) {
+        if !name.isEmpty {
             user.name = name
             user.isRegister.toggle()
         }
